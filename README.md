@@ -6,7 +6,7 @@ Aplicação desenvolvida em Java com o objetivo de gerenciar agendamentos de for
 
 #### Funcionalidades ⚙️
 
-    ⬜️ - Cadastro de usuários
+    ☑️ - Cadastro de usuários
     
     ⬜️ - Cadastro de serviços
     
