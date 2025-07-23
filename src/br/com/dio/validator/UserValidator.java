@@ -14,7 +14,7 @@ public class UserValidator {
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
 
-    public static void verifyModel(final UserModel model) throws ValidatorException {
+    public static void verifyModelUser(final UserModel model) throws ValidatorException {
         if (stringIsBlank(model.getName()))
             throw new ValidatorException("Informe um nome válido!");
         if (model.getName().length() <= 1)

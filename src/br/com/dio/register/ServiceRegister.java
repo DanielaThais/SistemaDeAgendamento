@@ -1,26 +1,26 @@
-package br.com.dio.dao;
+package br.com.dio.register;
 
 import br.com.dio.exception.EmptyStorageException;
-import br.com.dio.model.UserModel;
-import br.com.dio.exception.UserNotFoundException;
+import br.com.dio.model.ServiceModel;
+import br.com.dio.exception.NotFoundException;
 
 import java.util.List;
 import java.util.ArrayList;
 
-public class UserDAO {
+public class ServiceRegister {
 
 
     private long nextId = 1L;
 
-    private final List<UserModel> models = new ArrayList<>();
+    private final List<ServiceModel> models = new ArrayList<>();
 
-    public UserModel save(final UserModel model) {
+    public ServiceModel save(final ServiceModel model) {
         model.setId(nextId++);
         models.add(model);
         return model;
     }
 
-    public UserModel update(final UserModel model) {
+    public ServiceModel update(final ServiceModel model) {
         var toUpdate = findById(model.getId());
         models.remove(toUpdate);
         models.add(model);
@@ -32,17 +32,17 @@ public class UserDAO {
         models.remove(toDelete);
     }
 
-    public UserModel findById(final long id) {
+    public ServiceModel findById(final long id) {
         verifyStorage();
         var message = String.format("Não existe usuário com o id informado: %d", id);
         return models.stream()
                 .filter(user -> user.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new UserNotFoundException(message));
+                .orElseThrow(() -> new NotFoundException(message));
     }
 
-    public List<UserModel> findAll() {
-        List<UserModel> result = null;
+    public List<ServiceModel> findAll() {
+        List<ServiceModel> result = null;
         try {
             verifyStorage();
             result = models;
