@@ -11,19 +11,22 @@ import lombok.*;
 @Table(name = "usuario")
 @Entity
 
-public class Usuario<string> {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "email", unique = true, nullable = false)
-    private string email;
+    private String email;
 
     @Column(name = "nome", nullable = false)
-    private string nome;
+    private String nome;
 
     @Column(name = "telefone", nullable = false)
-    private string telefone;
+    private String telefone;
+
+    @Column(name = "senha", nullable = false)
+    private String senha;
 
 }

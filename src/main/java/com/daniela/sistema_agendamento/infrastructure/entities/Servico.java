@@ -13,16 +13,16 @@ import java.math.BigDecimal;
 @Table(name = "servico")
 @Entity
 
-public class Servico<string> {
+public class Servico{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "nome", nullable = false)
-    private string nome;
+    private String nome;
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "valor", nullable = false)
     private BigDecimal valor;
 
     @Column(name = "duracaoMinutos")
