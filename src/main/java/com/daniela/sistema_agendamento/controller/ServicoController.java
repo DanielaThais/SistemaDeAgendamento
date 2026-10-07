@@ -1,6 +1,7 @@
 package com.daniela.sistema_agendamento.controller;
 
 import com.daniela.sistema_agendamento.business.ServicoService;
+import com.daniela.sistema_agendamento.dto.ServicoDTO;
 import com.daniela.sistema_agendamento.infrastructure.entities.Servico;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,14 @@ public class ServicoController {
     private final ServicoService servicoService;
 
     @PostMapping
-    public ResponseEntity<Void> salvarServico(@RequestBody Servico servico) {
+    public ResponseEntity<Void> salvarServico(@RequestBody ServicoDTO servicoDTO) {
+        Servico servico = Servico.builder()
+                        .nome(servicoDTO.nome())
+                        .duracaoMinutos(servicoDTO.duracaoMinutos())
+                        .valor(servicoDTO.valor())
+                        .ativo(servicoDTO.ativo())
+                        .build();
+
         servicoService.salvarServico(servico);
         return ResponseEntity.ok().build();
     }

@@ -2,6 +2,7 @@ package com.daniela.sistema_agendamento.controller;
 
 import com.daniela.sistema_agendamento.business.UsuarioService;
 import com.daniela.sistema_agendamento.dto.LoginDTO;
+import com.daniela.sistema_agendamento.dto.UsuarioDTO;
 import com.daniela.sistema_agendamento.infrastructure.entities.Usuario;
 import com.daniela.sistema_agendamento.security.TokenService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,15 @@ public class UsuarioController {
     private final TokenService tokenService;
 
     @PostMapping()
-    public ResponseEntity<Void> salvarUsuario(@RequestBody Usuario usuario){
-         usuarioService.salvarUsuario(usuario);
+    public ResponseEntity<Void> salvarUsuario(@RequestBody UsuarioDTO usuarioDTO){
+        Usuario usuario = Usuario.builder()
+                .email(usuarioDTO.email())
+                .nome(usuarioDTO.nome())
+                .telefone(usuarioDTO.telefone())
+                .senha(usuarioDTO.senha())
+                .build();
+
+        usuarioService.salvarUsuario(usuario);
         return ResponseEntity.ok().build();
     }
 
