@@ -2,7 +2,6 @@ package com.daniela.sistema_agendamento.business;
 
 import com.daniela.sistema_agendamento.infrastructure.entities.Usuario;
 import com.daniela.sistema_agendamento.infrastructure.repositories.UsuarioRepository;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
