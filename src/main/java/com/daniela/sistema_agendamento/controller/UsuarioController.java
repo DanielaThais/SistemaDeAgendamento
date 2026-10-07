@@ -1,9 +1,12 @@
 package com.daniela.sistema_agendamento.controller;
 
 import com.daniela.sistema_agendamento.business.UsuarioService;
+import com.daniela.sistema_agendamento.dto.LoginDTO;
 import com.daniela.sistema_agendamento.infrastructure.entities.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,10 +15,23 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final AuthenticationManager authenticationManager;
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Void> salvarUsuario(@RequestBody Usuario usuario){
          usuarioService.salvarUsuario(usuario);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Void> login(@RequestBody LoginDTO loginDTO){
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginDTO.email(),
+                        loginDTO.senha()
+                )
+        );
+
         return ResponseEntity.ok().build();
     }
 
