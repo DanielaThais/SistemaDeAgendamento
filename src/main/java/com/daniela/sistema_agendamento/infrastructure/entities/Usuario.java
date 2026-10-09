@@ -29,4 +29,7 @@ public class Usuario {
     @Column(name = "senha", nullable = false)
     private String senha;
 
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+    private Profissional profissional;
+
 }

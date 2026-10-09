@@ -47,6 +47,8 @@ public class UsuarioService implements UserDetailsService {
                         usuario.getEmail() : usuarioEntity.getEmail())
                 .nome(usuario.getNome() != null ?
                         usuario.getNome() : usuarioEntity.getNome())
+                .senha(usuario.getSenha() != null ?
+                        usuario.getSenha() : usuarioEntity.getSenha())
                 .telefone(usuario.getTelefone() != null ?
                         usuario.getTelefone() : usuarioEntity.getTelefone())
                 .id(usuarioEntity.getId())
