@@ -28,8 +28,8 @@ public class ServicoController {
     }
 
     @GetMapping
-    public  ResponseEntity<Servico> buscarServico(@RequestParam Integer id, @RequestBody Servico servico){
-        return ResponseEntity.ok(servicoService.buscarServico(id, servico));
+    public  ResponseEntity<Servico> buscarServico(@RequestParam Integer id){
+        return ResponseEntity.ok(servicoService.buscarServico(id));
     }
 
     @DeleteMapping

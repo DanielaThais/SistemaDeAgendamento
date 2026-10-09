@@ -1,6 +1,8 @@
 package com.daniela.sistema_agendamento.infrastructure.entities;
 
 import jakarta.persistence.*;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 
 @Getter
@@ -17,17 +19,9 @@ public class Profissional {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "email", unique = true, nullable = false)
-    private String email;
-
-    @Column(name = "nome", nullable = false)
-    private String nome;
-
-    @Column(name = "telefone", nullable = false)
-    private String telefone;
-
-    @Column(name = "senha", nullable = false)
-    private String senha;
+    @OneToOne
+    @JoinColumn(name = "usuario_id", unique = true, nullable = false)
+    private Usuario usuario;
 
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;

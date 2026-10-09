@@ -1,4 +1,6 @@
 package com.daniela.sistema_agendamento.dto;
 
-public record ProfissionalDTO(String email, String nome, String telefone, String senha, Boolean ativo) {
+import com.daniela.sistema_agendamento.infrastructure.entities.Usuario;
+
+public record ProfissionalDTO(Usuario usuario, Boolean ativo) {
 }

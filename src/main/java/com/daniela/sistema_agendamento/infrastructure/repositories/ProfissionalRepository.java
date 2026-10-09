@@ -8,8 +8,4 @@ import java.util.Optional;
 
 public interface ProfissionalRepository extends JpaRepository <Profissional, Integer> {
 
-    Optional <Profissional> findByEmail (String email);
-
-    @Transactional
-    void deleteByEmail(String email);
 }

@@ -17,7 +17,7 @@ public class ServicoService {
         repository.saveAndFlush(servico);
     }
 
-    public Servico buscarServico(Integer id, Servico servico){
+    public Servico buscarServico(Integer id){
         return repository.findById(id).orElseThrow(
                 () -> new RuntimeException ("Serviço não encontrado")
         );
