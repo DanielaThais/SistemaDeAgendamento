@@ -1,4 +1,5 @@
 package com.daniela.sistema_agendamento.business;
+import com.daniela.sistema_agendamento.config.StatusAgendamento;
 import com.daniela.sistema_agendamento.infrastructure.entities.Agendamento;
 import com.daniela.sistema_agendamento.infrastructure.entities.Servico;
 import com.daniela.sistema_agendamento.infrastructure.repositories.AgendamentoRepository;
@@ -28,8 +29,20 @@ public class AgendamentoService {
                 agendamento.getInicioEm().plusMinutes(servico.getDuracaoMinutos())
         );
 
+        boolean existeConflito = repository.existsByProfissionalIdAndStatusAndInicioEmLessThanAndPrevisaoTerminoGreaterThan(
+                agendamento.getProfissional().getId(),
+                StatusAgendamento.CONFIRMADO,
+                agendamento.getPrevisaoTermino(),
+                agendamento.getInicioEm()
+        );
+
+        if (existeConflito){
+            throw new RuntimeException("Esse profissional já possui agendamento nesse horário!");
+        }
+
         repository.saveAndFlush(agendamento);
     }
+
 
     public Agendamento buscarAgendamento(Integer id) {
         return repository.findById(id).orElseThrow(

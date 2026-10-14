@@ -39,7 +39,7 @@ public class Agendamento {
     private LocalDateTime terminoEm;
 
     @Column(name = "previsao_termino", nullable = false)
-    private LocalDateTime PrevisaoTermino;
+    private LocalDateTime previsaoTermino;
 
     @Column(name = "status")
     private StatusAgendamento status;
