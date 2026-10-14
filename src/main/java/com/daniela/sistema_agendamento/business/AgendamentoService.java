@@ -6,8 +6,6 @@ import com.daniela.sistema_agendamento.infrastructure.repositories.AgendamentoRe
 import com.daniela.sistema_agendamento.infrastructure.repositories.ServicoRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 public class AgendamentoService {
 
@@ -72,6 +70,15 @@ public class AgendamentoService {
                 ? agendamento.getUsuario() : agendamentoEntity.getUsuario());
 
         repository.saveAndFlush(agendamentoEntity);
+    }
+
+    public void cancelarAgendamento(Integer id){
+        Agendamento agendamentoCancelado = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
+
+        agendamentoCancelado.setStatus(StatusAgendamento.CANCELADO);
+
+        repository.saveAndFlush(agendamentoCancelado);
     }
 
 }
