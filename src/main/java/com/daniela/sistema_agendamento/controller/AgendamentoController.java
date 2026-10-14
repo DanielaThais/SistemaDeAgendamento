@@ -18,7 +18,6 @@ public class AgendamentoController {
     public ResponseEntity<Void> salvarAgendamento(@RequestBody AgendamentoDTO agendamentoDTO){
         Agendamento agendamento = Agendamento.builder()
                 .inicioEm(agendamentoDTO.inicioEm())
-                .terminoEm(agendamentoDTO.terminoEm())
                 .profissional(agendamentoDTO.profissional())
                 .servico(agendamentoDTO.servico())
                 .status(agendamentoDTO.status())

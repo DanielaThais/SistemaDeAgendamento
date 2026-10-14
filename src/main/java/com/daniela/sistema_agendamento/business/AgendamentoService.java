@@ -1,18 +1,33 @@
 package com.daniela.sistema_agendamento.business;
 import com.daniela.sistema_agendamento.infrastructure.entities.Agendamento;
+import com.daniela.sistema_agendamento.infrastructure.entities.Servico;
 import com.daniela.sistema_agendamento.infrastructure.repositories.AgendamentoRepository;
+import com.daniela.sistema_agendamento.infrastructure.repositories.ServicoRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class AgendamentoService {
 
     private final AgendamentoRepository repository;
+    private final ServicoRepository servicoRepository;
 
-    public AgendamentoService(AgendamentoRepository repository) {
+    public AgendamentoService(AgendamentoRepository repository, ServicoRepository servicoRepository) {
         this.repository = repository;
+        this.servicoRepository = servicoRepository;
     }
 
     public void salvarAgendamento(Agendamento agendamento) {
+        Servico servico = servicoRepository.findById(agendamento.getServico().getId())
+                        .orElseThrow( () -> new RuntimeException("Serviço não encontrado"));
+
+        agendamento.setServico(servico);
+
+        agendamento.setPrevisaoTermino(
+                agendamento.getInicioEm().plusMinutes(servico.getDuracaoMinutos())
+        );
+
         repository.saveAndFlush(agendamento);
     }
 
@@ -33,6 +48,9 @@ public class AgendamentoService {
                 ? agendamento.getInicioEm() : agendamentoEntity.getInicioEm());
         agendamentoEntity.setTerminoEm(agendamento.getTerminoEm() != null
                 ? agendamento.getTerminoEm() : agendamentoEntity.getTerminoEm());
+        agendamentoEntity.setPrevisaoTermino(agendamentoEntity.getInicioEm().plusMinutes(
+                agendamentoEntity.getServico().getDuracaoMinutos()
+        ));
         agendamentoEntity.setProfissional(agendamento.getProfissional() != null
                 ? agendamento.getProfissional() : agendamentoEntity.getProfissional());
         agendamentoEntity.setServico(agendamento.getServico() != null

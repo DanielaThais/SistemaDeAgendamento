@@ -8,6 +8,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-public record AgendamentoDTO(Usuario usuario, Profissional profissional, Servico servico, LocalDateTime inicioEm, LocalDateTime terminoEm, StatusAgendamento status) {
+public record AgendamentoDTO(Usuario usuario, Profissional profissional, Servico servico, LocalDateTime inicioEm, LocalDateTime terminoEm, LocalDateTime previsaoTermino, StatusAgendamento status) {
 }
 

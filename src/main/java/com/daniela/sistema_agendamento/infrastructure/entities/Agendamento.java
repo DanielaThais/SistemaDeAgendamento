@@ -21,7 +21,7 @@ public class Agendamento {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", unique = true, nullable = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     @ManyToOne
@@ -32,11 +32,14 @@ public class Agendamento {
     @JoinColumn(name = "servico_id", nullable = false)
     private Servico servico;
 
-    @Column(name = "inicio_em")
+    @Column(name = "inicio_em", nullable = false)
     private LocalDateTime inicioEm;
 
     @Column(name = "termino_em")
     private LocalDateTime terminoEm;
+
+    @Column(name = "previsao_termino", nullable = false)
+    private LocalDateTime PrevisaoTermino;
 
     @Column(name = "status")
     private StatusAgendamento status;
